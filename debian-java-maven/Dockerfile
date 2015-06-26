@@ -3,12 +3,12 @@ FROM debian:jessie
 MAINTAINER Joan Fisbein <joan@fisbein.com>
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV JAVA_VERSION 1.8.0
+# ENV JAVA_VERSION 1.8.0
 
 # Make sure the package repository is up to date.
 RUN apt-get update
 RUN apt-get -y install apt-utils
-RUN apt-get -y upgrade
+RUN apt-get -y upgrade && apt-get clean
 
 # Install a basic SSH server
 RUN apt-get install -y openssh-server
@@ -23,23 +23,18 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
 
 RUN apt-get update
-RUN apt-get -y install oracle-java8-installer oracle-java8-set-default
-
+RUN apt-get -y --no-install-recommends install oracle-java8-installer oracle-java8-set-default oracle-java8-unlimited-jce-policy && \
+    apt-get clean && \
+    rm -rf /var/cache/oracle-jdk8-installer/jdk-*.tar.gz
+    
 # Install Maven 3.2.2
-RUN wget --no-verbose -O /tmp/apache-maven-3.2.2.tar.gz http://archive.apache.org/dist/maven/maven-3/3.2.2/binaries/apache-maven-3.2.2-bin.tar.gz
+RUN wget --no-verbose -O /tmp/apache-maven-3.2.2.tar.gz http://archive.apache.org/dist/maven/maven-3/3.2.2/binaries/apache-maven-3.2.2-bin.tar.gz && \
+    tar xzf /tmp/apache-maven-3.2.2.tar.gz -C /opt/ && \
+    ln -s /opt/apache-maven-3.2.2 /opt/maven && \
+    ln -s /opt/maven/bin/mvn /usr/local/bin && \
+    rm -f /tmp/apache-maven-3.2.2.tar.gz
 
-# verify checksum
-RUN echo "87e5cc81bc4ab9b83986b3e77e6b3095 /tmp/apache-maven-3.2.2.tar.gz" | md5sum -c
-
-# install maven
-RUN tar xzf /tmp/apache-maven-3.2.2.tar.gz -C /opt/
-RUN ln -s /opt/apache-maven-3.2.2 /opt/maven
-RUN ln -s /opt/maven/bin/mvn /usr/local/bin
-RUN rm -f /tmp/apache-maven-3.2.2.tar.gz
 ENV MAVEN_HOME /opt/maven
-
-# Cleaning downloaded packages
-RUN apt-get clean
 
 # Add user jenkins to the image
 RUN adduser --gecos '' jenkins
