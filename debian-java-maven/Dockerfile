@@ -30,8 +30,8 @@ RUN apt-get -y --no-install-recommends install oracle-java8-installer oracle-jav
     rm -rf /var/cache/oracle-jdk8-installer/jdk-*.tar.gz && \
     rm -rf /var/cache/oracle-jdk8-installer/UnlimitedJCEPolicyJDK8 && \
     rm -rf /var/cache/oracle-jdk8-installer/*.zip
-    
-    
+
+
 # Install Maven 3.2.2
 RUN wget --no-verbose -O /tmp/apache-maven-3.2.2.tar.gz http://archive.apache.org/dist/maven/maven-3/3.2.2/binaries/apache-maven-3.2.2-bin.tar.gz && \
     tar xzf /tmp/apache-maven-3.2.2.tar.gz -C /opt/ && \
@@ -50,3 +50,4 @@ RUN echo "jenkins:jenkins" | chpasswd
 EXPOSE 22
 
 CMD ["/usr/sbin/sshd", "-D"]
+VOLUME /var/log
