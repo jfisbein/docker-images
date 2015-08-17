@@ -1,6 +1,6 @@
-# This Dockerfile is used to build an image containing basic stuff to be used as a Jenkins slave build node.
+# This Dockerfile is used to build an image containing basic stuff to be used as a Java node
 
-FROM ubuntu:15.04
+FROM ubuntu:latest
 MAINTAINER Joan Fisbein <joan@fisbein.com>
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -19,6 +19,7 @@ RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
 ## Accept Oracle License
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
 
+## Install packages and clean downloaded files
 RUN apt-get update
 RUN apt-get -y --no-install-recommends install oracle-java8-installer oracle-java8-set-default oracle-java8-unlimited-jce-policy && \
     apt-get clean && \
