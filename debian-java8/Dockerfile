@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER Joan Fisbein <joan@fon.com>
+MAINTAINER Joan Fisbein <joan@fisbein.com>
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -7,11 +7,6 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 RUN apt-get -y install apt-utils
 RUN apt-get -y upgrade && apt-get clean
-
-# Install a basic SSH server
-# RUN apt-get install -y openssh-server
-# RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd
-# RUN mkdir -p /var/run/sshd
 
 # Install Oracle JDK 8
 ## Install webupd8 repositories
