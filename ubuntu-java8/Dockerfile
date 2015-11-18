@@ -1,5 +1,3 @@
-# This Dockerfile is used to build an image containing basic stuff to be used as a Java node
-
 FROM ubuntu:latest
 MAINTAINER Joan Fisbein <joan@fisbein.com>
 

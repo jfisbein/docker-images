@@ -1,6 +1,6 @@
 # This Dockerfile is used to build an image containing basic stuff to be used as a Jenkins slave build node.
 
-FROM jfisbein/docker-images:debian-java8
+FROM jfisbein/docker-images:debian8-java8
 MAINTAINER Joan Fisbein <joan@fisbein.com>
 
 ENV DEBIAN_FRONTEND noninteractive
