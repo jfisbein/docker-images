@@ -19,8 +19,8 @@ RUN wget -q https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION
     mv apache-tomcat* tomcat
 
 ADD create_tomcat_admin_user.sh /create_tomcat_admin_user.sh
-ADD run.sh /run.sh
+ADD run-tomcat.sh /run-tomcat.sh
 RUN chmod +x /*.sh
 
 EXPOSE 8080
-CMD ["/run.sh"]
+CMD ["/run-tomcat.sh"]
