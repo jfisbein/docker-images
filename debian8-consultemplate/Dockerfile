@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Make sure the package repository is up to date.
 RUN apt-get update
-RUN apt-get -y install apt-utils
+RUN apt-get -y install apt-utils wget
 RUN apt-get -y upgrade && apt-get clean
 
 ENV consul_template_ver 0.11.1
