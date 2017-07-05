@@ -2,7 +2,7 @@ FROM jfisbein/docker-images:debian8-java8
 MAINTAINER Joan Fisbein <joan@fisbein.com>
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV consul_template_ver 0.11.1
+ENV consul_template_ver 0.19.0
 
 # Install consult template
 RUN wget --retry-connrefused -t 5 https://releases.hashicorp.com/consul-template/${consul_template_ver}/consul-template_${consul_template_ver}_linux_amd64.zip -O /tmp/consul-template.zip
