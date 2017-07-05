@@ -8,7 +8,7 @@ RUN apt-get update
 RUN apt-get -y install apt-utils wget unzip
 RUN apt-get -y upgrade && apt-get clean
 
-ENV consul_template_ver 0.14.0
+ENV consul_template_ver 0.19.0
 
 # Install consult template
 RUN wget --retry-connrefused -t 5 https://releases.hashicorp.com/consul-template/${consul_template_ver}/consul-template_${consul_template_ver}_linux_amd64.zip -O /tmp/consul-template.zip
